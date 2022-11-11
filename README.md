@@ -21,4 +21,6 @@ To deploy this project run:
 
 ## Screenshots
 
+This is graph of train set error and test set error rate during training with the full dataset.
+
 ![My Image](training.png)
