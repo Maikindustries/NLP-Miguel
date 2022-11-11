@@ -25,9 +25,7 @@ def main():
                                 dev_file='dev')
 
   corpus = corpus.downsample(0.2)
-  # tag_dictionary = corpus.make_label_dictionary(label_type = "ner")
-
-  # tag_dictionary = corpus.make_label_dictionary(label_type = "ner")
+  
   tagger = SequenceTagger.load("flair/ner-english-ontonotes-fast")
 
   trainer = ModelTrainer(tagger, corpus)
@@ -35,19 +33,6 @@ def main():
   trainer.train('resources/taggers/ner-english', max_epochs=10)
 
   model = SequenceTagger.load('resources/taggers/ner-english/final-model.pt')
-
-  # num = 6
-  # exp = corpus.test[num].to_tagged_string('text')
-  # print(corpus.test[num].to_tagged_string('ner'))
-  # sentence = Sentence(exp)
-
-  # model.predict(sentence)
-
-  # for entity in sentence.get_spans('ner'):
-  #     print(entity)
-  
-  # print(inspect.signature(trainer.train))
-  
   plotter = Plotter()
   plotter.plot_training_curves('resources/taggers/ner-english/loss.tsv')
   
