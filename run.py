@@ -18,11 +18,11 @@ def main():
 
   # Part 2
   columns = {0 : 'text', 1 : 'ner'}
-  data_folder = '/content/'
+  data_folder = 'content'
   corpus: Corpus = ColumnCorpus(data_folder, columns,
-                                train_file = 'train',
-                                test_file = 'test',
-                                dev_file = 'dev')
+                                train_file='train',
+                                test_file='test',
+                                dev_file='dev')
 
   corpus = corpus.downsample(0.2)
   # tag_dictionary = corpus.make_label_dictionary(label_type = "ner")
@@ -32,8 +32,7 @@ def main():
 
   trainer = ModelTrainer(tagger, corpus)
 
-  trainer.train('resources/taggers/ner-english',train_with_dev=True,max_epochs=25,
-                monitor_train = True, monitor_test = True)
+  trainer.train('resources/taggers/ner-english', max_epochs=10)
 
   model = SequenceTagger.load('resources/taggers/ner-english/final-model.pt')
 
@@ -50,7 +49,7 @@ def main():
   # print(inspect.signature(trainer.train))
   
   plotter = Plotter()
-  plotter.plot_training_curves('/content/resources/taggers/ner-english/loss.tsv')
+  plotter.plot_training_curves('resources/taggers/ner-english/loss.tsv')
   
   # Part 3
   print()
