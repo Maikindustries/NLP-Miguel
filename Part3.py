@@ -14,7 +14,6 @@ class Part3:
         line = f.readline()
         if not line:
             break
-        # line = line.replace("'", "\'")
         line = line.replace(".", "")
         lines_es.append(line.strip())
 
@@ -25,7 +24,6 @@ class Part3:
         line = f.readline()
         if not line:
             break
-        # line = line.replace("'", "\'")
         line = line.replace(".", "")
         lines_en.append(line.strip())
 
