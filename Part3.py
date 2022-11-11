@@ -56,6 +56,3 @@ class Part3:
     # sacar promedio
     print("GOOGLE_TRANSLATOR ", sum(results_g) / len(results_g))
     print("Helsinki-NLP/opus-mt-es-en ", sum(results_h) / len(results_h))
-
-part3 = Part3()
-part3.run()

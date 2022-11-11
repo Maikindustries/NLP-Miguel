@@ -14,6 +14,8 @@ def main():
   part1 = Part1()
   part1.run()
 
+  print()
+
   # Part 2
   columns = {0 : 'text', 1 : 'ner'}
   data_folder = '/content/'
@@ -51,6 +53,7 @@ def main():
   plotter.plot_training_curves('/content/resources/taggers/ner-english/loss.tsv')
   
   # Part 3
+  print()
   part3 = Part3()
   part3.run()
 
