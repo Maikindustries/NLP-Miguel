@@ -1,13 +1,11 @@
 from googletrans import Translator
 from nltk.translate.bleu_score import sentence_bleu
 from transformers import pipeline
+import unittest
 
-class Part3:
-  def __init__(self):
-    pass
-
+class Part3(unittest.TestCase):
   def run(self):
-    # read espanish sentences
+    # read spanish sentences
     lines_es = []
     with open("es.txt", "r") as f:
       while True:
@@ -34,7 +32,6 @@ class Part3:
     model_checkpoint = "Helsinki-NLP/opus-mt-es-en"
     translator_h = pipeline("translation", model=model_checkpoint)
 
-
     results_g, results_h = [], []
     for es, en in zip(lines_es, lines_en):
       # Google
@@ -51,6 +48,12 @@ class Part3:
       bleu_score = sentence_bleu([translation], en.split())
       results_h.append(bleu_score)
 
-    # sacar promedio
-    print("GOOGLE_TRANSLATOR ", sum(results_g) / len(results_g))
-    print("Helsinki-NLP/opus-mt-es-en ", sum(results_h) / len(results_h))
+    # Calculate the average
+    google_avg = sum(results_g) / len(results_g)
+    helsinki_avg = sum(results_h) / len(results_h)
+    print("GOOGLE_TRANSLATOR ", google_avg)
+    print("Helsinki-NLP/opus-mt-es-en ", helsinki_avg)
+
+    # Tests
+    self.assertEqual(google_avg, 0.32662462131108)
+    self.assertEqual(helsinki_avg, 0.31194402697495693)
