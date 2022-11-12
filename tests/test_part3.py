@@ -2,11 +2,11 @@ import unittest
 import sys
 import os
 
-current = os.path.dirname(os.path.realpath(__file__))
-parent_directory = os.path.dirname(current)
-sys.path.append(parent_directory)
+# current = os.path.dirname(os.path.realpath(__file__))
+# parent_directory = os.path.dirname(current)
+# sys.path.append(parent_directory)
 
-from src.Part3 import Translators
+from ..src.Part3 import Translators
 
 class test_part3(unittest.TestCase):
   def test_1(self):
