@@ -1,30 +1,33 @@
 from googletrans import Translator
 from nltk.translate.bleu_score import sentence_bleu
 from transformers import pipeline
-import unittest
 
-class Part3(unittest.TestCase):
-  def run(self):
+class Translators:
+  def __init__(self, es_file_name, en_file_name):
+    self.es_text_lines = []
+    self.en_text_lines = []
+    self.read_files(es_file_name, en_file_name)
+
+  def read_files(self, es_file_name, en_file_name):
     # read spanish sentences
-    lines_es = []
-    with open("es.txt", "r") as f:
+    with open(es_file_name, "r") as f:
       while True:
         line = f.readline()
         if not line:
             break
         line = line.replace(".", "")
-        lines_es.append(line.strip())
+        self.es_text_lines.append(line.strip())
 
     # read english sentences
-    lines_en = []
-    with open("en.txt", "r") as f:
+    with open(en_file_name, "r") as f:
       while True:
         line = f.readline()
         if not line:
             break
         line = line.replace(".", "")
-        lines_en.append(line.strip())
+        self.en_text_lines.append(line.strip())
 
+  def translate(self):
     #Google translator
     translator_g = Translator()
 
@@ -33,7 +36,7 @@ class Part3(unittest.TestCase):
     translator_h = pipeline("translation", model=model_checkpoint)
 
     results_g, results_h = [], []
-    for es, en in zip(lines_es, lines_en):
+    for es, en in zip(self.es_text_lines, self.en_text_lines):
       # Google
       translation = translator_g.translate(es, src="es", dest="en")
       poss_translations = translation.extra_data["possible-translations"][0][2]
@@ -51,9 +54,12 @@ class Part3(unittest.TestCase):
     # Calculate the average
     google_avg = sum(results_g) / len(results_g)
     helsinki_avg = sum(results_h) / len(results_h)
-    print("GOOGLE_TRANSLATOR ", google_avg)
-    print("Helsinki-NLP/opus-mt-es-en ", helsinki_avg)
+    return google_avg, helsinki_avg
 
-    # Tests
-    self.assertEqual(google_avg, 0.32662462131108)
-    self.assertEqual(helsinki_avg, 0.31194402697495693)
+
+class Part3:
+  def run(self):
+    translators = Translators("es.txt","en.txt")
+    google_avg, helsinki_avg = translators.translate()
+    print(google_avg)
+    print(helsinki_avg)

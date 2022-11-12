@@ -1,5 +1,5 @@
-from Part1 import Part1
-from Part3 import Part3
+from src.Part1 import Part1
+from src.Part3 import Part3
 from flair.data import Corpus
 from flair.datasets import ColumnCorpus
 from flair.models import SequenceTagger
