@@ -18,9 +18,19 @@ To deploy this project run:
   pip install -r requirements.txt && python run.py
 ```
 
+\
+To run the tests you need to run:
+
+```bash
+  python -m unittest test_part3.py
+```
+
+```bash
+  python -m unittest test_part1.py
+```
 
 ## Screenshots
 
 This is graph of train set error and test set error rate during training with the full dataset.
 
-![My Image](training.png)
+![My Image](plot_full_dataset.png)
