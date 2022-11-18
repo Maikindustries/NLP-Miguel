@@ -1,7 +1,8 @@
 import unittest
 import sys
 import os
- 
+ # Add tests for other parts! When writing code, I write the test for each class or piece of functionality as soon as I finish that piece. It helps you develop incrementally, being sure that each piece of code is clean and works like you expect it to! 
+
 current = os.path.dirname(os.path.realpath(__file__))
 parent_directory = os.path.dirname(current)
 sys.path.append(parent_directory)
