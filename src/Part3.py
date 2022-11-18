@@ -11,16 +11,12 @@ class Translators:
   def read_files(self, es_file_name, en_file_name):
     # read spanish sentences
     with open(es_file_name, "r") as f:
-      while True:
-        line = f.readline()
-        if not line:
-            break
-        line = line.replace(".", "")
-        self.es_text_lines.append(line.strip())
+      lines = f.readlines(0
+      self.es_text_lines = [line.replace(".", "").strip() for line in lines]
 
     # read english sentences
     with open(en_file_name, "r") as f:
-      while True:
+      while True: # same readlines edit as above
         line = f.readline()
         if not line:
             break
@@ -41,8 +37,8 @@ class Translators:
       translation = translator_g.translate(es, src="es", dest="en")
       poss_translations = translation.extra_data["possible-translations"][0][2]
       refs = []
-      for i in poss_translations:
-        refs.append(i[0].split())
+      for poss_translation in poss_translations:
+        refs.append(poss_translation[0].split())
       bleu_score = sentence_bleu(refs, en.split())
       results_g.append(bleu_score)
 
@@ -52,7 +48,7 @@ class Translators:
       results_h.append(bleu_score)
 
     # Calculate the average
-    google_avg = sum(results_g) / len(results_g)
+    google_avg = sum(results_g) / len(results_g) # nit: you'll get divide by 0 if no lines...add an assert before to check that! 
     helsinki_avg = sum(results_h) / len(results_h)
     return google_avg, helsinki_avg
 
