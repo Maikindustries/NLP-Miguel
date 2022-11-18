@@ -9,20 +9,18 @@ class SentimentAnalysis:
         if self.text_lines:
             self.text_lines = []
         with open(file_name, "r") as f:
-          while True:
-            line = f.readline()
-            if not line:
-                break
+          lines = f.readlines()
+           for line in lines: 
             line = line.replace("'", "")
             self.text_lines.append(line.strip())
 
     def run_analysis(self):
         if not self.text_lines:
             raise Exception("A file must be read first!")
-        sentiment_pipeline = pipeline("sentiment-analysis")
+        sentiment_pipeline = pipeline("sentiment-analysis") # nit: think you can do a batch here with a list of lines instead of calling sentiment_pipeline on each one individually! usually that is way more efficient. 
         results = []
-        for i in range(len(self.text_lines)):
-            res = sentiment_pipeline(self.text_lines[i])
+        for line in self.text_lines:
+            res = sentiment_pipeline(line)
             results.append(res[0]["label"])
         return results
 
