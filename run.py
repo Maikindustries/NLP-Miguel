@@ -11,13 +11,18 @@ from flair.visual.training_curves import Plotter
     Miguel Ángel Pérez López A01750145
 """
 
+PERCENT_OF_DATASET_TO_TRAIN = 0.2
+NER_MODEL_FAST = "flair/ner-english-ontonotes-fast"
+NER_MODEL = "resources/taggers/ner-english"
+FINAL_MODEL = "resources/taggers/ner-english/final-model.pt"
+MODEL_LOSS = "resources/taggers/ner-english/loss.tsv"
+
 def main():
   # Part 1
   part1 = Part1()
   part1.run()
 
   # Part 2
-  PERCENT_OF_DATASET_TO_TRAIN = 0.2
   columns = {0 : 'text',
              1 : 'ner'}
   data_folder = 'content'
@@ -28,18 +33,16 @@ def main():
                                 dev_file='dev')
 
   corpus = corpus.downsample(PERCENT_OF_DATASET_TO_TRAIN)
-  tagger = SequenceTagger.load("flair/ner-english-ontonotes-fast")
+  tagger = SequenceTagger.load(NER_MODEL_FAST)
   trainer = ModelTrainer(tagger, corpus)
-  trainer.train('resources/taggers/ner-english', max_epochs=10)
-  model = SequenceTagger.load('resources/taggers/ner-english/final-model.pt')
+  trainer.train(NER_MODEL, max_epochs=10)
+  model = SequenceTagger.load(FINAL_MODEL)
   # Graph
   plotter = Plotter()
-  plotter.plot_training_curves('resources/taggers/ner-english/loss.tsv')
+  plotter.plot_training_curves(MODEL_LOSS)
   
   # Part 3
   part3 = Part3()
   part3.run()
 
-
-if __name__ == '__main__':
-  main()
+main()
