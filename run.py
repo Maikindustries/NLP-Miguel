@@ -17,7 +17,8 @@ def main():
   part1.run()
 
   # Part 2
-  PERCENT_OF_DATASET_TO_TRAIN = 0.2
+  # Nit: put this in a Part2 file/class for consistency with the others
+  PERCENT_OF_DATASET_TO_TRAIN = 0.2 # constants should go at top of module! 
   columns = {0 : 'text',
              1 : 'ner'}
   data_folder = 'content'
@@ -28,9 +29,9 @@ def main():
                                 dev_file='dev')
 
   corpus = corpus.downsample(PERCENT_OF_DATASET_TO_TRAIN)
-  tagger = SequenceTagger.load("flair/ner-english-ontonotes-fast")
+  tagger = SequenceTagger.load("flair/ner-english-ontonotes-fast") #nit: usually paths are pulled out as constants at top of module 
   trainer = ModelTrainer(tagger, corpus)
-  trainer.train('resources/taggers/ner-english', max_epochs=10)
+  trainer.train('resources/taggers/ner-english', max_epochs=10) # same re: constants
   model = SequenceTagger.load('resources/taggers/ner-english/final-model.pt')
   # Graph
   plotter = Plotter()
