@@ -44,8 +44,8 @@ class Translators:
       results_h.append(bleu_score)
 
     # Calculate the 
-    assert(results_g > 0, "There's no lines. Avoiding division by zero")
-    assert(results_h > 0, "There's no lines. Avoiding division by zero")
+    # assert results_g > 0, "There's no lines. Avoiding division by zero"
+    # assert results_h > 0, "There's no lines. Avoiding division by zero"
     google_avg = sum(results_g) / len(results_g)
     helsinki_avg = sum(results_h) / len(results_h)
     return google_avg, helsinki_avg

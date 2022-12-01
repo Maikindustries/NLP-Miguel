@@ -18,10 +18,8 @@ class SentimentAnalysis:
         if not self.text_lines:
             raise Exception("A file must be read first!")
         sentiment_pipeline = pipeline("sentiment-analysis")
-        results = []
-        for line in self.text_lines:
-            res = sentiment_pipeline(line)
-            results.append(res[0]["label"])
+        analyzed_text = sentiment_pipeline(self.text_lines)
+        results = [result["label"] for result in analyzed_text]
         return results
 
 
