@@ -23,6 +23,8 @@ To run the tests you need to run:
 
 ```bash
   python -m unittest test_part1.py
+  python -m unittest test_part2.py
+  python -m unittest test_part3.py
 ```
 
 ```bash
@@ -30,7 +32,7 @@ To run the tests you need to run:
 ```
 
 ```bash
-  python -m unittest test_part1.py
+  python -m unittest test_part3.py
 ```
 
 ## Screenshots
