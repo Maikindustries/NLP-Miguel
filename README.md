@@ -27,14 +27,6 @@ To run the tests you need to run:
   python -m unittest test_part3.py
 ```
 
-```bash
-  python -m unittest test_part2.py
-```
-
-```bash
-  python -m unittest test_part3.py
-```
-
 ## Screenshots
 
 This is graph of train set error and test set error rate during training with the full dataset.
